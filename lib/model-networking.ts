@@ -20,11 +20,11 @@ export class ModelNetworking extends cdk.Construct {
         super(scope, id);
 
         this.modelVPC = new ec2.Vpc(this, 'Model-VPC-POC', {
-            cidr: props.cidr,
+            cidr: props.cidr, //Networking props
             enableDnsHostnames: true,
             enableDnsSupport: true,
-            maxAzs: props.maxAzs,
-            natGateways: props.natGateways,
+            maxAzs: props.maxAzs,  // Networking props
+            natGateways: props.natGateways,  // Networking props
             subnetConfiguration: [
                 {
                     cidrMask: props.cidrMask,
