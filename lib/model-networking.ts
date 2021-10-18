@@ -40,6 +40,7 @@ export class ModelNetworking extends cdk.Construct {
             ]
         });
 
+        // Front-End Security Group
         const frontendServerSG = new ec2.SecurityGroup(this, 'Frontend-Server-SG', {
             vpc: this.modelVPC,
             allowAllOutbound: true,
@@ -64,13 +65,14 @@ export class ModelNetworking extends cdk.Construct {
             'Allow HTTP traffic fron anywhere'
         );
 
-
+          // Back-End Security Group
         const backendServerSG = new ec2.SecurityGroup(this, 'Backend-SG', {
             vpc: this.modelVPC,
             allowAllOutbound: true,
             description: 'Security group for the backend server'
         });
 
+          // Back-End Security Group - Traffic only allows from frontend SG
         backendServerSG.connections.allowFrom(
             new ec2.Connections({
                 securityGroups: [frontendServerSG],

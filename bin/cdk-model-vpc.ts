@@ -2,9 +2,11 @@
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
 import { CdkModelVpcStack } from '../lib/cdk-model-vpc-stack';
+import { Tags } from '@aws-cdk/core';
 
 const app = new cdk.App();
-new CdkModelVpcStack(app, 'CdkModelVpcStack', {
+const stack = new CdkModelVpcStack(app, 'CdkModelVpcStack', {
+
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -21,3 +23,7 @@ new CdkModelVpcStack(app, 'CdkModelVpcStack', {
   
   
 });
+
+// Tags at app level, entire stack
+Tags.of(stack).add('App', 'AWSVPC-POC');
+Tags.of(stack).add('Environment', 'Development');
